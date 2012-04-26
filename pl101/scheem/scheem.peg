@@ -1,0 +1,25 @@
+start =
+    expression
+
+expression =
+    ws a:atom ws
+        { return a; }
+    /
+    ws "(" a:expression* ")" ws
+        { return a; }
+    /
+    ws "'" a:expression
+        { return ["quote", a]; }
+
+wschar =
+    [ \t\r\n]
+
+ws =
+    wschar* (";;" (!"\n" .)* "\n" wschar*)*
+
+validchar =
+    [0-9a-zA-Z_?!+\-=@#$%^&*/.]
+
+atom =
+    chars:validchar+
+        { return chars.join(""); }
