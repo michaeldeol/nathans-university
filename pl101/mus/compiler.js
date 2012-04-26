@@ -16,7 +16,6 @@ var convertPitch = function (pitch) {
         octave;
     if (pitch.length !== 2) {
         throw new Error("Invalid Pitch: " + pitch);
-        return;
     } else {
         letterPitch = pitch.toLowerCase().charAt(0);
         octave = pitch.charAt(1);
@@ -96,7 +95,7 @@ var melody_rest_repeat_mus = {
         tag: 'repeat',
         section: { tag: 'note', pitch: 'c4', dur: 250 },
         count: 3
-    },
+    }
 };
 
 console.log(melody_rest_repeat_mus);
