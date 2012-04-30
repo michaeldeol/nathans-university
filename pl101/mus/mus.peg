@@ -1,0 +1,50 @@
+start =
+   reg_seq
+
+reg_seq =
+    left:par_seq ws right:reg_seq
+        { return {tag:'seq', left:left, right:right} }
+    /
+    par_seq
+
+par_seq =
+    left:note_seq ws right:par_seq
+        { return {tag:'par', left:left, right:right} }
+    /
+    note_seq
+
+note_seq =
+    left:note " " right:note_seq
+        { return {tag:'seq', left:left, right:right} }
+    /
+    note
+    /
+    repeat
+
+note =
+    n:[a-g] o:octave d:duration
+        { return {tag:'note', pitch:(n + o), dur:d} }
+    /
+    rest
+
+repeat =
+    "("s:reg_seq")"n:number
+        { return {tag:'repeat', section:s, count:n} }
+
+rest =
+    "r"n:number
+    { return {tag:'rest', duration:n} }
+
+octave =
+    [0-9]*
+
+duration =
+    "["n:number"]"
+        { return n }
+
+number =
+    n:[0-9]*
+        { return n.join("") }
+
+ws =
+   [ \t\r\n]*

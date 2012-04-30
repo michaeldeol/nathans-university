@@ -15,8 +15,8 @@ var test = { tag: 'seq',
   right:
    { tag: 'seq',
      left: { tag: 'note', pitch: 'e4', dur: 250 },
-     right: { tag: 'note', pitch: 'g4', dur: 500 } 
-    } 
+     right: { tag: 'note', pitch: 'g4', dur: 500 }
+    }
 };
-  
-console.log(reverse(test));​
+
+console.log(reverse(test));
