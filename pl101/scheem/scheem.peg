@@ -21,5 +21,8 @@ validchar =
     [0-9a-zA-Z_?!+\-=@#$%^&*/.]
 
 atom =
+    ( sign:[+-]? intchars:[0-9]+ )
+        { return parseInt(sign + intchars.join(""), 10); }
+    /
     chars:validchar+
         { return chars.join(""); }
